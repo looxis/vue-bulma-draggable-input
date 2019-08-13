@@ -1,20 +1,22 @@
 <template>
     <div class="wrapper">
-     <!--   <div class="string-preview">
-            {{value}}
-        </div>-->
-        <draggable v-model="wordsArray">
-            <transition-group>
+        <!--   <div class="string-preview">
+               {{value}}
+           </div>-->
+        <draggable v-model="wordsArray" v-bind="dragOptions" class="list-group" tag="ul" @start="drag = true"
+                   @end="drag = false">
+            <transition-group type="transition" :name="!drag ? 'flip-list' : null">
                 <div class="word-item-wrapper tag is-light is-medium is-rounded"
                      v-for="(el,i) in wordsArray" :key="i">
                     <template v-if="!el.isInputShowing">
-                        <span v-if="el.word" class="word-item" @click="wordClickHandler(el, i, ...arguments)">
+                        <span class="word-item" @click="wordClickHandler(el, i, ...arguments)">
                             {{el.word}}
                         </span>
-                        <span class="icon ion-ios-close" @click="removeWordHandler(el, i, ...arguments)"></span>
+                        <button class="delete is-small" @click="removeWordHandler(el, i, ...arguments)"></button>
                     </template>
                     <template v-else>
-                        <input class="input is-small is-rounded" type="text" :key="i" v-model="el.word">
+                        <input class="word-input input is-small is-rounded" type="text" :key="i" v-model="el.word"
+                               autofocus>
                         <span class="icon ion-ios-checkmark-circle-outline"
                               @click="wordClickHandler(el, i, ...arguments)">
                         </span>
@@ -35,7 +37,8 @@
         },
         data() {
             return {
-                wordsArray: []
+                wordsArray: [],
+                drag: false
             }
         },
         props: ['value'],
@@ -65,6 +68,16 @@
                 let new_string = arr.map(el => el.word).join(' ');
                 this.$emit('input', new_string);
             }
+        },
+        computed: {
+            dragOptions() {
+                return {
+                    animation: 100,
+                    group: "description",
+                    disabled: false,
+                    ghostClass: "ghost"
+                };
+            }
         }
     }
 </script>
@@ -89,5 +102,34 @@
 
     .icon:active {
         transform: scale(1.1);
+    }
+
+    .button {
+        margin-top: 35px;
+    }
+
+    .flip-list-move {
+        transition: transform 0.5s;
+    }
+
+    .no-move {
+        transition: transform 0s;
+    }
+
+    .ghost {
+        opacity: 0.5;
+        background: #c8ebfb;
+    }
+
+    .list-group {
+        min-height: 20px;
+    }
+
+    .list-group-item {
+        cursor: move;
+    }
+
+    .list-group-item i {
+        cursor: pointer;
     }
 </style>
