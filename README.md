@@ -19,3 +19,8 @@ import DraggableInput from "vue-bulma-draggable-input";
 <draggable-input v-model="data"></draggable-input>
 ```
 ##### data -> {{String}} 
+
+### connect bulma styles to your component
+```
+import '../node_modules/bulma/css/bulma.css';
+```

@@ -3,9 +3,8 @@
         <!--   <div class="string-preview">
                {{value}}
            </div>-->
-        <draggable v-model="wordsArray" v-bind="dragOptions" class="list-group" tag="ul" @start="drag = true"
-                   @end="drag = false">
-            <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+        <draggable v-model="wordsArray" v-bind="dragOptions" class="list-group" tag="ul" :style="styles.wordItem">
+            <transition-group type="transition">
                 <div class="word-item-wrapper tag is-light is-medium is-rounded"
                      v-for="(el,i) in wordsArray" :key="i">
                     <template v-if="!el.isInputShowing">
@@ -17,9 +16,19 @@
                     <template v-else>
                         <input class="word-input input is-small is-rounded" type="text" :key="i" v-model="el.word"
                                autofocus>
-                        <span class="icon ion-ios-checkmark-circle-outline"
-                              @click="wordClickHandler(el, i, ...arguments)">
+                        <span class="icon" @click="wordClickHandler(el, i, ...arguments)">
+                            <svg aria-hidden="true" :style="styles.checkIcon" focusable="false" data-prefix="far"
+                                 data-icon="check-circle"
+                                 role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                                 class="svg-inline--fa fa-check-circle fa-w-16 fa-2x">
+                                <path fill="currentColor"
+                                      d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"
+                                      class=""></path>
+                            </svg>
                         </span>
+                        <!--          <span class="icon ion-ios-checkmark-circle-outline"
+                                        @click="wordClickHandler(el, i, ...arguments)">
+                                  </span>-->
                     </template>
                 </div>
             </transition-group>
@@ -29,7 +38,15 @@
 
 <script>
     import draggable from 'vuedraggable'
-    import '../../node_modules/bulma/css/bulma.css';
+
+    const styles = {
+        wordItem: {
+            'cursor': 'pointer'
+        },
+        checkIcon: {
+            'width': '18px'
+        }
+    };
 
     export default {
         name: 'DraggableInput',
@@ -39,7 +56,7 @@
         data() {
             return {
                 wordsArray: [],
-                drag: false
+                styles: styles
             }
         },
         props: ['value'],

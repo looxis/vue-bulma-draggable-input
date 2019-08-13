@@ -6,6 +6,7 @@
 
 <script>
     import DraggableInput from './components/DraggableInput.vue'
+    import '../node_modules/bulma/css/bulma.css';
 
     export default {
         name: 'app',
