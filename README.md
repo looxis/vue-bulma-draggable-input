@@ -1,29 +1,21 @@
 # vue-bulma-draggable-input
 
 ## Project setup
-```
-yarn install
-```
 
-### Compiles and hot-reloads for development
+### get project:
 ```
-yarn run serve
-```
+yarn add https://github.com/looxis/vue-bulma-draggable-input
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+or
 
-### Run your tests
+npm install --save https://github.com/looxis/vue-bulma-draggable-input
 ```
-yarn run test
+### import component
 ```
-
-### Lints and fixes files
+import DraggableInput from "@vue-bulma-draggable-input";
 ```
-yarn run lint
+### connect component and pass data to it 
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+<draggable-input v-model="data"></draggable-input>
+```
+##### data -> {{String}} 
