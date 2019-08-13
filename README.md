@@ -2,7 +2,7 @@
 
 ## Project setup
 
-### get project:
+### get project
 ```
 yarn add https://github.com/looxis/vue-bulma-draggable-input
 
