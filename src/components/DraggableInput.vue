@@ -29,6 +29,7 @@
 
 <script>
     import draggable from 'vuedraggable'
+    import '../../node_modules/bulma/css/bulma.css';
 
     export default {
         name: 'DraggableInput',
