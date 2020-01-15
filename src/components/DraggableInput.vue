@@ -61,7 +61,7 @@
         },
         props: ['value'],
         watch: {
-            wordsArray: function (val, oldVal) {
+            wordsArray: function (val) {
                 this.combineString(val);
             }
         },
@@ -74,12 +74,12 @@
             });
         },
         methods: {
-            wordClickHandler: function (el, i, e) {
+            wordClickHandler: function (el) {
                 el.isInputShowing = !el.isInputShowing;
                 this.wordsArray = this.wordsArray.filter(el => el.word);
                 this.combineString(this.wordsArray);
             },
-            removeWordHandler: function (el, i, e) {
+            removeWordHandler: function (el, i) {
                 this.wordsArray.splice(i, 1);
             },
             combineString: function (arr) {
